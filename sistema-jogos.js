@@ -1,17 +1,17 @@
-document.write(`
-<strong>[t]</strong> ver todos os jogos<br>
-<strong>[rand]</strong> ordem aleatória<br>
-<strong>[v]</strong> ver jogo<br>
-<strong>[size]</strong> mostrar quantidade de jogos<br>
-<strong>[d]</strong> deletar jogo<br>
-<strong>[du]</strong> deletar ultimo jogo<br>
-<strong>[dp]</strong> deletar primeiro jogo<br>
-<strong>[a]</strong> adicionar jogo<br>
-<strong>[p]</strong> ver primeiro jogo adicionado<br>
-<strong>[u]</strong> ver último jogo adicionado<br>
-<strong>[asc]</strong> ordenar jogos (alfabética, asc)<br>
-<strong>[desc]</strong> ordenar jogos (alfabética, desc)<br>
-`);
+const options = `
+[t] ver todos os jogos
+[rand] ordem aleatória
+[v] ver jogo
+[size] mostrar quantidade de jogos
+[d] deletar jogo
+[du] deletar último jogo
+[dp] deletar primeiro jogo
+[a] adicionar jogo
+[p] ver primeiro jogo adicionado
+[u] ver último jogo adicionado
+[asc] ordenar jogos (alfabética, asc)
+[desc] ordenar jogos (alfabética, desc)
+`;
 
 const jogos = [
   "Dark Souls",
@@ -30,7 +30,7 @@ const jogos = [
   "Zelda",
 ];
 
-const acao = prompt("Qual ação você quer executar?");
+const acao = prompt(`Qual ação você quer executar?${options}`);
 
 function sortJogosAleatorios() {
   return Math.random() - 0.5;
@@ -38,27 +38,19 @@ function sortJogosAleatorios() {
 
 switch (acao) {
   case "t":
-    console.log(...jogos);
+    verTodosOsJogos();
     break;
   case "rand":
-    jogos.sort(sortJogosAleatorios);
-    console.log(...jogos);
+    mostrarJogosEmOrdemAleatoria();
     break;
   case "v":
-    const indiceJogo = Number(prompt("Digite o índice do jogo:"));
-    const jogoSelecionado = jogos[indiceJogo];
-    console.log(jogoSelecionado);
+    verJogo();
     break;
   case "size":
-    const quantidadeDeJogos = jogos.length;
-    console.log(quantidadeDeJogos);
+    mostrarQuantidadeDeJogos();
     break;
   case "d":
-    const indiceJogoDeletar = Number(
-      prompt("Digite o índice do jogo a ser deletado:")
-    );
-    jogos.splice(indiceJogoDeletar, 1);
-    console.log(...jogos);
+    deletarJogoPeloIndice();
     break;
   case "du":
     jogos.pop();
@@ -92,4 +84,32 @@ switch (acao) {
     break;
   default:
     alert("Erro: a ação digitada é inválida.");
+}
+
+function verTodosOsJogos() {
+  console.log(...jogos);
+}
+
+function mostrarJogosEmOrdemAleatoria() {
+  jogos.sort(sortJogosAleatorios);
+  console.log(...jogos);
+}
+
+function verJogo() {
+  const indiceJogo = Number(prompt("Digite o índice do jogo:"));
+  const jogoSelecionado = jogos[indiceJogo];
+  console.log(jogoSelecionado);
+}
+
+function mostrarQuantidadeDeJogos() {
+  const quantidadeDeJogos = jogos.length;
+  console.log(quantidadeDeJogos);
+}
+
+function deletarJogoPeloIndice() {
+  const indiceJogoDeletar = Number(
+    prompt("Digite o índice do jogo a ser deletado:")
+  );
+  jogos.splice(indiceJogoDeletar, 1);
+  console.log(...jogos);
 }
